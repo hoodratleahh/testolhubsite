@@ -27,13 +27,13 @@
     var btn = document.getElementById('copy-script-btn');
     if (!btn) return;
 
-    // Replace this with your actual raw script URL when you host the .lua on GitHub
-    var scriptUrl = 'https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/main/mm2summerupdauto.lua';
+    var scriptUrl = 'https://raw.githubusercontent.com/hoodratleahh/testolhubsite/refs/heads/main/scriptmaxxing.lua';
+    var loadstringCode = 'loadstring(game:HttpGet("' + scriptUrl + '"))()';
 
     btn.addEventListener('click', function (e) {
       e.preventDefault();
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(scriptUrl).then(
+        navigator.clipboard.writeText(loadstringCode).then(
           function () {
             var label = btn.textContent;
             btn.textContent = 'Link copied!';
