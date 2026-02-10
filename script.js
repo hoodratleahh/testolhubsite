@@ -156,25 +156,49 @@
   }
 
   function initCopyButton() {
-    var btn = document.getElementById('copy-script-btn');
-    if (!btn) return;
     var scriptUrl = 'https://raw.githubusercontent.com/hoodratleahh/testolhubsite/refs/heads/main/scriptmaxxing.lua';
     var loadstringCode = 'loadstring(game:HttpGet("' + scriptUrl + '"))()';
-    btn.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(loadstringCode).then(
-          function () {
-            var label = btn.textContent;
-            btn.textContent = 'Copied!';
-            setTimeout(function () { btn.textContent = label; }, 2000);
-          },
-          function () { btn.textContent = 'Copy failed'; }
-        );
-      } else {
-        btn.textContent = 'Copy: ' + scriptUrl;
-        btn.href = scriptUrl;
-      }
+    function bindCopy(btn) {
+      if (!btn) return;
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(loadstringCode).then(
+            function () {
+              var label = btn.textContent;
+              btn.textContent = 'Copied!';
+              setTimeout(function () { btn.textContent = label; }, 2000);
+            },
+            function () { btn.textContent = 'Copy failed'; }
+          );
+        } else {
+          btn.textContent = 'Copy: ' + scriptUrl;
+          if (btn.href !== undefined) btn.href = scriptUrl;
+        }
+      });
+    }
+    bindCopy(document.getElementById('copy-script-btn'));
+    bindCopy(document.getElementById('copy-script-btn-bottom'));
+  }
+
+  function initFilterPills() {
+    var pills = document.querySelectorAll('.filter-pill');
+    var cards = document.querySelectorAll('.feature-card[data-cat]');
+    if (!pills.length || !cards.length) return;
+    pills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        var filter = pill.getAttribute('data-filter');
+        pills.forEach(function (p) { p.classList.remove('is-active'); });
+        pill.classList.add('is-active');
+        cards.forEach(function (card) {
+          var cat = card.getAttribute('data-cat');
+          if (filter === 'all' || cat === filter) {
+            card.classList.remove('filter-hidden');
+          } else {
+            card.classList.add('filter-hidden');
+          }
+        });
+      });
     });
   }
 
@@ -208,6 +232,7 @@
   initReveals();
   initMagneticCta();
   initCopyButton();
+  initFilterPills();
   initSmoothScroll();
   initImageFallback();
 })();
