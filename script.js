@@ -4,6 +4,66 @@
   var STAGGER_MS = 120;
   var MAGNETIC_STRENGTH = 0.2;
   var MAGNETIC_RADIUS = 120;
+  var LOGO_TEXT = 'Testol Hub';
+  var TYPING_MS = 90;
+
+  function initTypingLogo() {
+    var container = document.getElementById('logo-typed');
+    var cursor = document.getElementById('logo-cursor');
+    var logoWrap = container && container.closest('.logo');
+    if (!container || !logoWrap) return;
+    var i = 0;
+    function typeNext() {
+      if (i <= LOGO_TEXT.length) {
+        container.textContent = LOGO_TEXT.slice(0, i);
+        i++;
+        setTimeout(typeNext, TYPING_MS);
+      } else {
+        logoWrap.classList.add('typing-done');
+      }
+    }
+    setTimeout(typeNext, 400);
+  }
+
+  function initDayPopup() {
+    var popup = document.getElementById('day-popup');
+    var buttons = popup && document.getElementById('day-popup-buttons');
+    var thanksEl = popup && document.getElementById('day-popup-thanks');
+    var goodBtn = popup && popup.querySelector('[data-choice="good"]');
+    var badBtn = popup && popup.querySelector('[data-choice="bad"]');
+    if (!popup) return;
+    var key = 'testolhub_day_asked';
+    try {
+      if (sessionStorage.getItem(key)) return;
+    } catch (e) {}
+    function closePopup(choice) {
+      if (thanksEl && (choice === 'good' || choice === 'bad')) {
+        thanksEl.textContent = choice === 'good' ? 'Glad to hear it.' : 'Hope tomorrow\'s better.';
+        thanksEl.classList.add('is-visible');
+        if (buttons) buttons.style.opacity = '0';
+        setTimeout(doClose, 1200);
+      } else {
+        doClose();
+      }
+      function doClose() {
+        try { sessionStorage.setItem(key, '1'); } catch (e) {}
+        popup.classList.remove('is-open');
+        popup.classList.add('is-closing');
+        setTimeout(function () {
+          popup.classList.remove('is-closing');
+          popup.setAttribute('aria-hidden', 'true');
+          if (buttons) buttons.style.opacity = '';
+          if (thanksEl) thanksEl.classList.remove('is-visible');
+        }, 400);
+      }
+    }
+    setTimeout(function () {
+      popup.classList.add('is-open');
+      popup.setAttribute('aria-hidden', 'false');
+    }, 600);
+    if (goodBtn) goodBtn.addEventListener('click', function () { closePopup('good'); });
+    if (badBtn) badBtn.addEventListener('click', function () { closePopup('bad'); });
+  }
 
   function initScrollProgress() {
     var bar = document.getElementById('scroll-progress');
@@ -141,6 +201,8 @@
     });
   }
 
+  initTypingLogo();
+  initDayPopup();
   initScrollProgress();
   initHeaderScroll();
   initReveals();
