@@ -844,6 +844,124 @@ a:hover { color: var(--accent-soft); }
   line-height: 1.65;
 }
 
+/* ----- Testimonials section ----- */
+.testimonials-section {
+  background: var(--bg);
+}
+.testimonials-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 900px) {
+  .testimonials-layout {
+    grid-template-columns: 1fr;
+  }
+}
+.testimonial-video-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+.video-aspect {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+.video-aspect iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.testimonial-video-link {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  text-align: center;
+  border-top: 1px solid var(--border);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+.testimonial-video-link:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+}
+.testimonials-side {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.testimonial-few-line {
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  margin: 0;
+}
+.testimonial-socials {
+  padding: 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.testimonial-socials-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+.testimonial-social-link {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 0.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+}
+.testimonial-social-link:hover {
+  border-color: var(--border-strong);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+}
+.testimonial-quotes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.testimonial-quote {
+  margin: 0;
+  padding: 1.25rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-style: normal;
+  transition: border-color var(--transition-mid);
+}
+.testimonial-quote:hover {
+  border-color: var(--border-strong);
+}
+.testimonial-quote p {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  margin: 0 0 0.5rem;
+}
+.testimonial-quote cite {
+  font-size: 0.75rem;
+  font-style: normal;
+  color: var(--text-soft);
+}
+
 /* ----- Get it section ----- */
 .get-section {
   position: relative;
