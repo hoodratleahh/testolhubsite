@@ -272,7 +272,7 @@
           requestAnimationFrame(tick);
         });
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
     counters.forEach(function (el) { observer.observe(el); });
   }
