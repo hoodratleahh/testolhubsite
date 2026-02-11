@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Testol Hub | Optimized for Murder Mystery 2</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +24,10 @@
   <div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
 
   <header class="site-header" id="site-header">
+    <div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
     <div class="header-inner">
       <span class="logo" aria-label="Testol Hub"><span id="logo-typed"></span><span class="logo-cursor" id="logo-cursor" aria-hidden="true"></span></span>
-      <nav>
+      <nav id="site-nav">
         <a href="#why">Why us</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#features">Features</a>
@@ -34,7 +35,11 @@
         <a href="#testimonials">Testimonials</a>
         <a href="#get-it" class="header-cta-pill">Get script</a>
       </nav>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu"></button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle-icon" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
     </div>
   </header>
 

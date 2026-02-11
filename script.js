@@ -90,6 +90,47 @@
     update();
   }
 
+  function initNavToggle() {
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.getElementById('site-nav');
+    var backdrop = document.getElementById('nav-backdrop');
+    if (!toggle || !nav) return;
+    function open() {
+      nav.classList.add('is-open');
+      if (backdrop) {
+        backdrop.classList.add('is-visible');
+        backdrop.setAttribute('aria-hidden', 'false');
+      }
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
+    }
+    function close() {
+      nav.classList.remove('is-open');
+      if (backdrop) {
+        backdrop.classList.remove('is-visible');
+        backdrop.setAttribute('aria-hidden', 'true');
+      }
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    }
+    toggle.addEventListener('click', function () {
+      if (nav.classList.contains('is-open')) close();
+      else open();
+    });
+    if (backdrop) backdrop.addEventListener('click', close);
+    nav.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', close);
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.classList.contains('is-open')) close();
+    });
+  }
+
   function initReveals() {
     var reveals = document.querySelectorAll('[data-reveal]');
     if (!reveals.length) return;
@@ -231,50 +272,64 @@
   function initStatCountUp() {
     var counters = document.querySelectorAll('.stat-value-count[data-count]');
     if (!counters.length) return;
-    var observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          var el = entry.target;
-          if (el.dataset.counted) return;
-          el.dataset.counted = '1';
-          var target = parseInt(el.getAttribute('data-count'), 10);
-          var suffix = el.getAttribute('data-suffix') || '';
-          var format = el.getAttribute('data-format');
-          var duration = 1800;
-          var start = performance.now();
-          function easeOutQuart(t) {
-            return 1 - Math.pow(1 - t, 4);
-          }
-          function tick(now) {
-            var elapsed = now - start;
-            var progress = Math.min(elapsed / duration, 1);
-            var eased = easeOutQuart(progress);
-            var value = Math.floor(target * eased);
-            var display;
-            if (format === 'short' && value >= 1000000) {
-              display = (value / 1000000).toFixed(value >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm';
-            } else if (value >= 1000) {
-              display = value.toLocaleString();
-            } else {
-              display = String(value);
-            }
-            el.textContent = display + suffix;
-            if (progress < 1) {
-              requestAnimationFrame(tick);
-            } else {
-              el.textContent = (format === 'short' && target >= 1000000)
-                ? (target / 1000000).toFixed(target >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm' + suffix
-                : target.toLocaleString() + suffix;
-              el.classList.add('counted');
-            }
-          }
+    var hero = document.querySelector('.hero');
+
+    function runCountUp(el) {
+      if (el.dataset.counted) return;
+      el.dataset.counted = '1';
+      var target = parseInt(el.getAttribute('data-count'), 10);
+      var suffix = el.getAttribute('data-suffix') || '';
+      var format = el.getAttribute('data-format');
+      var duration = 1800;
+      var start = performance.now();
+      function easeOutQuart(t) {
+        return 1 - Math.pow(1 - t, 4);
+      }
+      function tick(now) {
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var eased = easeOutQuart(progress);
+        var value = Math.floor(target * eased);
+        var display;
+        if (format === 'short' && value >= 1000000) {
+          display = (value / 1000000).toFixed(value >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm';
+        } else if (value >= 1000) {
+          display = value.toLocaleString();
+        } else {
+          display = String(value);
+        }
+        el.textContent = display + suffix;
+        if (progress < 1) {
           requestAnimationFrame(tick);
-        });
-      },
-      { threshold: 0.1 }
-    );
-    counters.forEach(function (el) { observer.observe(el); });
+        } else {
+          el.textContent = (format === 'short' && target >= 1000000)
+            ? (target / 1000000).toFixed(target >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm' + suffix
+            : target.toLocaleString() + suffix;
+          el.classList.add('counted');
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
+    // Hero stats: start count after reveal (hero stats have delay 4 = ~560ms)
+    var heroStatsDelay = 700;
+    counters.forEach(function (el) {
+      if (hero && hero.contains(el)) {
+        setTimeout(function () { runCountUp(el); }, heroStatsDelay);
+      } else {
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              observer.unobserve(entry.target);
+              runCountUp(entry.target);
+            });
+          },
+          { threshold: 0.1 }
+        );
+        observer.observe(el);
+      }
+    });
   }
 
   function initImageFallback() {
@@ -334,6 +389,7 @@
   initStatCountUp();
   initScrollProgress();
   initHeaderScroll();
+  initNavToggle();
   initReveals();
   initMagneticCta();
   initCopyButton();
