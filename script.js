@@ -228,6 +228,55 @@
     });
   }
 
+  function initStatCountUp() {
+    var counters = document.querySelectorAll('.stat-value-count[data-count]');
+    if (!counters.length) return;
+    var observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          if (el.dataset.counted) return;
+          el.dataset.counted = '1';
+          var target = parseInt(el.getAttribute('data-count'), 10);
+          var suffix = el.getAttribute('data-suffix') || '';
+          var format = el.getAttribute('data-format');
+          var duration = 1800;
+          var start = performance.now();
+          function easeOutQuart(t) {
+            return 1 - Math.pow(1 - t, 4);
+          }
+          function tick(now) {
+            var elapsed = now - start;
+            var progress = Math.min(elapsed / duration, 1);
+            var eased = easeOutQuart(progress);
+            var value = Math.floor(target * eased);
+            var display;
+            if (format === 'short' && value >= 1000000) {
+              display = (value / 1000000).toFixed(value >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm';
+            } else if (value >= 1000) {
+              display = value.toLocaleString();
+            } else {
+              display = String(value);
+            }
+            el.textContent = display + suffix;
+            if (progress < 1) {
+              requestAnimationFrame(tick);
+            } else {
+              el.textContent = (format === 'short' && target >= 1000000)
+                ? (target / 1000000).toFixed(target >= 10000000 ? 0 : 1).replace(/\.0$/, '') + 'm' + suffix
+                : target.toLocaleString() + suffix;
+              el.classList.add('counted');
+            }
+          }
+          requestAnimationFrame(tick);
+        });
+      },
+      { threshold: 0.3 }
+    );
+    counters.forEach(function (el) { observer.observe(el); });
+  }
+
   function initImageFallback() {
     document.querySelectorAll('.screenshot-frame img').forEach(function (img) {
       img.addEventListener('error', function () {
@@ -282,6 +331,7 @@
 
   initTypingLogo();
   initDayPopup();
+  initStatCountUp();
   initScrollProgress();
   initHeaderScroll();
   initReveals();
