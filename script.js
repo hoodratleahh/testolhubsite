@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var STAGGER_MS = 120;
+  var STAGGER_MS = 140;
   var MAGNETIC_STRENGTH = 0.2;
   var MAGNETIC_RADIUS = 120;
   var LOGO_TEXT = 'Testol Hub';
@@ -93,6 +93,8 @@
   function initReveals() {
     var reveals = document.querySelectorAll('[data-reveal]');
     if (!reveals.length) return;
+    var hero = document.querySelector('.hero');
+    var heroReveals = hero ? hero.querySelectorAll('[data-reveal]') : [];
     reveals.forEach(function (el) {
       var delay = el.getAttribute('data-delay');
       if (delay !== null && delay !== '') {
@@ -100,6 +102,14 @@
         el.style.transitionDelay = ms + 'ms';
       }
     });
+    heroReveals.forEach(function (el) {
+      var delay = el.getAttribute('data-delay');
+      var ms = delay !== null && delay !== '' ? parseInt(delay, 10) * STAGGER_MS : 0;
+      el.style.transitionDelay = ms + 'ms';
+    });
+    setTimeout(function () {
+      heroReveals.forEach(function (el) { el.classList.add('revealed'); });
+    }, 200);
     var observer = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
@@ -108,7 +118,9 @@
       },
       { rootMargin: '0px 0px -60px 0px', threshold: 0.05 }
     );
-    reveals.forEach(function (el) { observer.observe(el); });
+    reveals.forEach(function (el) {
+      if (!hero || !hero.contains(el)) observer.observe(el);
+    });
   }
 
   function initMagneticCta() {
