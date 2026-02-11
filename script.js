@@ -225,6 +225,31 @@
     });
   }
 
+  function initTestimonialCarousel() {
+    var track1 = document.getElementById('testimonial-track-1');
+    var track2 = document.getElementById('testimonial-track-2');
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      if (track1) track1.classList.add('no-animation');
+      if (track2) track2.classList.add('no-animation');
+      return;
+    }
+    if (track1) {
+      var cards1 = track1.querySelectorAll('.testimonial-card');
+      cards1.forEach(function (card) {
+        var clone = card.cloneNode(true);
+        track1.appendChild(clone);
+      });
+    }
+    if (track2) {
+      var cards2 = track2.querySelectorAll('.testimonial-card');
+      cards2.forEach(function (card) {
+        var clone = card.cloneNode(true);
+        track2.appendChild(clone);
+      });
+    }
+  }
+
   initTypingLogo();
   initDayPopup();
   initScrollProgress();
@@ -235,4 +260,5 @@
   initFilterPills();
   initSmoothScroll();
   initImageFallback();
+  initTestimonialCarousel();
 })();
