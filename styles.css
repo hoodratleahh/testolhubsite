@@ -898,6 +898,179 @@ a:hover { color: var(--accent-soft); }
   line-height: 1.65;
 }
 
+/* ----- Discord integration section ----- */
+.discord-section {
+  background: var(--bg);
+}
+.discord-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-top: 2rem;
+}
+@media (max-width: 900px) {
+  .discord-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+.discord-heading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+.discord-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+.discord-benefits {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.discord-benefits li {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  padding: 0.4rem 0 0.4rem 1.5rem;
+  position: relative;
+}
+.discord-benefits li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+.iphone-mockup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.iphone-frame {
+  width: 280px;
+  height: 565px;
+  background: #1c1c1e;
+  border-radius: 42px;
+  padding: 12px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 3px #2c2c2e, inset 0 0 0 2px rgba(255,255,255,0.05);
+}
+.iphone-notch {
+  width: 120px;
+  height: 28px;
+  background: #000;
+  border-radius: 0 0 20px 20px;
+  margin: 0 auto 8px;
+}
+.iphone-screen {
+  background: #000;
+  border-radius: 32px;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.iphone-status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 44px 24px 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+.iphone-status-icons {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+.iphone-signal::before,
+.iphone-wifi::before,
+.iphone-battery::before {
+  content: '';
+  display: block;
+  background: #fff;
+}
+.iphone-signal::before { width: 18px; height: 10px; clip-path: polygon(0 100%, 25% 60%, 50% 80%, 75% 40%, 100% 60%); }
+.iphone-wifi::before { width: 16px; height: 10px; border-radius: 50%; border: 2px solid #fff; border-top-color: transparent; }
+.iphone-battery::before { width: 24px; height: 11px; border: 2px solid #fff; border-radius: 3px; }
+.discord-notification {
+  margin: 16px 12px;
+  background: #36393f;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #40444b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+.discord-notif-header {
+  padding: 12px 14px 8px;
+  background: rgba(88, 101, 242, 0.15);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.discord-notif-app {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.discord-icon {
+  width: 24px;
+  height: 24px;
+  color: #5865F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.discord-icon svg {
+  width: 22px;
+  height: 22px;
+}
+.discord-app-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.discord-now {
+  margin-left: auto;
+  font-size: 12px;
+  color: #b9bbbe;
+}
+.discord-notif-body {
+  padding: 12px 14px 14px;
+}
+.discord-notif-message {
+  font-size: 13px;
+  color: #fff;
+  margin: 0 0 4px;
+}
+.discord-notif-message strong {
+  color: var(--accent-cyan);
+}
+.discord-notif-content {
+  font-size: 14px;
+  color: #dcddde;
+  line-height: 1.5;
+  margin: 0;
+}
+.discord-user {
+  color: var(--accent-cyan);
+  font-weight: 500;
+}
+.iphone-home-indicator {
+  width: 134px;
+  height: 5px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 100px;
+  margin: auto 0 12px;
+  align-self: center;
+}
+
 /* ----- Testimonials section ----- */
 .testimonials-section {
   background: var(--bg);
