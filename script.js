@@ -234,20 +234,31 @@
       if (track2) track2.classList.add('no-animation');
       return;
     }
-    if (track1) {
-      var cards1 = track1.querySelectorAll('.testimonial-card');
-      cards1.forEach(function (card) {
-        var clone = card.cloneNode(true);
-        track1.appendChild(clone);
+    function duplicateTrack(track) {
+      if (!track) return;
+      var cards = track.querySelectorAll('.testimonial-card');
+      cards.forEach(function (card) {
+        track.appendChild(card.cloneNode(true));
       });
     }
-    if (track2) {
-      var cards2 = track2.querySelectorAll('.testimonial-card');
-      cards2.forEach(function (card) {
-        var clone = card.cloneNode(true);
-        track2.appendChild(clone);
-      });
+    duplicateTrack(track1);
+    duplicateTrack(track2);
+    function runMarquee(track, direction) {
+      if (!track) return;
+      var offset = 0;
+      var halfWidth = track.scrollWidth / 2;
+      var speed = 0.8;
+      function tick() {
+        offset += direction * speed;
+        if (offset >= halfWidth) offset -= halfWidth;
+        if (offset <= -halfWidth) offset += halfWidth;
+        track.style.transform = 'translateX(' + offset + 'px)';
+        requestAnimationFrame(tick);
+      }
+      setTimeout(function () { requestAnimationFrame(tick); }, 100);
     }
+    runMarquee(track1, -1);
+    runMarquee(track2, 1);
   }
 
   initTypingLogo();
