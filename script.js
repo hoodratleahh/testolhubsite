@@ -394,6 +394,36 @@
     runMarquee(track2, 1);
   }
 
+  function initExecutorsMarquee() {
+    var track = document.getElementById('executors-track');
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!track || prefersReducedMotion) {
+      if (track) track.classList.add('no-animation');
+      return;
+    }
+    var items = track.querySelectorAll('.executor-item');
+    items.forEach(function (item) { track.appendChild(item.cloneNode(true)); });
+    var offset = 0;
+    var speed = 1;
+    var direction = -1;
+    function getHalfWidth() {
+      return Math.floor(track.scrollWidth / 2) || 1;
+    }
+    function tick() {
+      var halfWidth = getHalfWidth();
+      offset += direction * speed;
+      if (offset >= halfWidth) offset -= halfWidth;
+      if (offset <= -halfWidth) offset += halfWidth;
+      track.style.transform = 'translateX(' + offset + 'px)';
+      requestAnimationFrame(tick);
+    }
+    function start() {
+      if (getHalfWidth() > 1) requestAnimationFrame(tick);
+      else requestAnimationFrame(start);
+    }
+    requestAnimationFrame(start);
+  }
+
   initTypingLogo();
   initDayPopup();
   initStatCountUp();
@@ -407,4 +437,5 @@
   initSmoothScroll();
   initImageFallback();
   initTestimonialCarousel();
+  initExecutorsMarquee();
 })();

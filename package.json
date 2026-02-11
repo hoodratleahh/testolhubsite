@@ -1,0 +1,15 @@
+{
+  "name": "testol-hub-site",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "build:obfuscate": "node build.js --obfuscate"
+  },
+  "devDependencies": {
+    "clean-css": "^5.3.3",
+    "html-minifier-terser": "^7.2.0",
+    "javascript-obfuscator": "^4.1.0",
+    "terser": "^5.24.0"
+  }
+}

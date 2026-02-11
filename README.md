@@ -8,6 +8,18 @@ A simple GitHub Pages site for **Testol Hub**: the MM2 helper that collects coin
 - **styles.css** – Layout, colors, and motion
 - **script.js** – Scroll reveals and copy-button behavior
 
+## Build (minify / obfuscate)
+
+To create a production build with minified and obfuscated code:
+
+```bash
+npm install
+npm run build          # Minify HTML, CSS, JS (smaller, harder to read)
+npm run build:obfuscate # Minify + obfuscate JS (stronger protection)
+```
+
+Output goes to the **dist/** folder. Deploy the contents of `dist/` instead of the root folder.
+
 ## How to launch on GitHub Pages
 
 1. Create a new repository on GitHub (e.g. `testol-hub` or `testol-hub-site`).
