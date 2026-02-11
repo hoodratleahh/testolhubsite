@@ -235,6 +235,13 @@
         img.alt = 'Screenshot placeholder. Add screenshots/1.jpg, 2.jpg, 3.jpg to show your images.';
       });
     });
+    var iphoneImg = document.querySelector('.iphone-mockup-img');
+    if (iphoneImg) {
+      iphoneImg.addEventListener('error', function () {
+        this.src = 'assets/iphone-mockup.svg';
+        this.alt = 'iPhone mockup';
+      });
+    }
   }
 
   function initTestimonialCarousel() {

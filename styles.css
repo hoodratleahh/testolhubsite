@@ -964,55 +964,37 @@ a:hover { color: var(--accent-soft); }
   justify-content: center;
   align-items: center;
 }
-.iphone-frame {
-  width: 280px;
-  height: 565px;
-  background: #1c1c1e;
-  border-radius: 42px;
-  padding: 12px;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5), 0 0 0 3px #2c2c2e, inset 0 0 0 2px rgba(255,255,255,0.05);
-}
-.iphone-notch {
-  width: 120px;
-  height: 28px;
-  background: #000;
-  border-radius: 0 0 20px 20px;
-  margin: 0 auto 8px;
-}
-.iphone-screen {
-  background: #000;
-  border-radius: 32px;
-  height: 100%;
-  overflow: hidden;
+.iphone-mockup-container {
   display: flex;
   flex-direction: column;
-}
-.iphone-status-bar {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 44px 24px 12px;
-  font-size: 15px;
-  font-weight: 600;
-  color: #fff;
+  gap: 1.5rem;
 }
-.iphone-status-icons {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-}
-.iphone-signal::before,
-.iphone-wifi::before,
-.iphone-battery::before {
-  content: '';
+.iphone-mockup-img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
   display: block;
-  background: #fff;
 }
-.iphone-signal::before { width: 18px; height: 10px; clip-path: polygon(0 100%, 25% 60%, 50% 80%, 75% 40%, 100% 60%); }
-.iphone-wifi::before { width: 16px; height: 10px; border-radius: 50%; border: 2px solid #fff; border-top-color: transparent; }
-.iphone-battery::before { width: 24px; height: 11px; border: 2px solid #fff; border-radius: 3px; }
+.discord-notif-card {
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  max-width: 320px;
+}
+.discord-notif-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  margin: 0 0 0.75rem;
+  text-transform: uppercase;
+}
 .discord-notification {
-  margin: 16px 12px;
+  margin: 0;
   background: #36393f;
   border-radius: 12px;
   overflow: hidden;
@@ -1072,13 +1054,18 @@ a:hover { color: var(--accent-soft); }
   color: var(--accent-cyan);
   font-weight: 500;
 }
-.iphone-home-indicator {
-  width: 134px;
-  height: 5px;
-  background: rgba(255,255,255,0.3);
-  border-radius: 100px;
-  margin: auto 0 12px;
-  align-self: center;
+@media (min-width: 768px) {
+  .iphone-mockup-container {
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+  }
+  .iphone-mockup-img {
+    max-width: 260px;
+  }
+  .discord-notif-card {
+    margin-top: 3rem;
+  }
 }
 
 /* ----- Testimonials section ----- */
