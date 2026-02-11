@@ -370,6 +370,7 @@
       if (!track) return;
       var offset = 0;
       var speed = 1.2;
+      var started = false;
       function getHalfWidth() {
         return Math.floor(track.scrollWidth / 2) || 1;
       }
@@ -388,7 +389,32 @@
           requestAnimationFrame(start);
         }
       }
-      requestAnimationFrame(start);
+      function tryStart() {
+        if (started) return;
+        track.offsetHeight;
+        if (getHalfWidth() > 1) {
+          started = true;
+          requestAnimationFrame(tick);
+        } else {
+          requestAnimationFrame(start);
+        }
+      }
+      var section = track.closest('.testimonials-section');
+      if (section) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) tryStart();
+          });
+        }, { threshold: 0 });
+        io.observe(section);
+        if (section.getBoundingClientRect().top < window.innerHeight) {
+          requestAnimationFrame(function () {
+            requestAnimationFrame(tryStart);
+          });
+        }
+      } else {
+        requestAnimationFrame(start);
+      }
     }
     runMarquee(track1, -1);
     runMarquee(track2, 1);
@@ -406,6 +432,7 @@
     var offset = 0;
     var speed = 1;
     var direction = -1;
+    var started = false;
     function getHalfWidth() {
       return Math.floor(track.scrollWidth / 2) || 1;
     }
@@ -418,10 +445,39 @@
       requestAnimationFrame(tick);
     }
     function start() {
-      if (getHalfWidth() > 1) requestAnimationFrame(tick);
-      else requestAnimationFrame(start);
+      if (getHalfWidth() > 1) {
+        started = true;
+        requestAnimationFrame(tick);
+      } else {
+        requestAnimationFrame(start);
+      }
     }
-    requestAnimationFrame(start);
+    function tryStart() {
+      if (started) return;
+      track.offsetHeight;
+      if (getHalfWidth() > 1) {
+        started = true;
+        requestAnimationFrame(tick);
+      } else {
+        requestAnimationFrame(start);
+      }
+    }
+    var section = track.closest('.executors-section');
+    if (section) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) tryStart();
+        });
+      }, { threshold: 0 });
+      io.observe(section);
+      if (section.getBoundingClientRect().top < window.innerHeight) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(tryStart);
+        });
+      }
+    } else {
+      requestAnimationFrame(start);
+    }
   }
 
   initTypingLogo();

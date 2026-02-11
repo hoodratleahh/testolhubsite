@@ -271,18 +271,24 @@ a:hover { color: var(--accent-soft); }
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 10000;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.3s var(--ease-out-expo), visibility 0.3s;
   -webkit-tap-highlight-color: transparent;
+  pointer-events: none;
 }
 @media (max-width: 768px) {
   .nav-backdrop.is-visible {
     display: block;
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
 }
 @media (max-width: 768px) {
@@ -294,18 +300,19 @@ a:hover { color: var(--accent-soft); }
     top: 0;
     right: 0;
     bottom: 0;
-    width: min(280px, 85vw);
+    width: min(280px, 78vw);
+    max-width: 280px;
     flex-direction: column;
     gap: 0;
     padding: 5rem 1.5rem 2rem;
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(8, 10, 14, 0.98);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     border-left: 1px solid var(--glass-border);
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.3);
+    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.5);
     transform: translateX(100%);
     transition: transform 0.3s var(--ease-out-expo);
-    z-index: 101;
+    z-index: 10001;
   }
   .site-header nav.is-open {
     transform: translateX(0);
