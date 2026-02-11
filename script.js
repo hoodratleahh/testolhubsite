@@ -369,16 +369,26 @@
     function runMarquee(track, direction) {
       if (!track) return;
       var offset = 0;
-      var halfWidth = track.scrollWidth / 2;
-      var speed = 0.8;
+      var speed = 1.2;
+      function getHalfWidth() {
+        return Math.floor(track.scrollWidth / 2) || 1;
+      }
       function tick() {
+        var halfWidth = getHalfWidth();
         offset += direction * speed;
         if (offset >= halfWidth) offset -= halfWidth;
         if (offset <= -halfWidth) offset += halfWidth;
         track.style.transform = 'translateX(' + offset + 'px)';
         requestAnimationFrame(tick);
       }
-      setTimeout(function () { requestAnimationFrame(tick); }, 100);
+      function start() {
+        if (getHalfWidth() > 1) {
+          requestAnimationFrame(tick);
+        } else {
+          requestAnimationFrame(start);
+        }
+      }
+      requestAnimationFrame(start);
     }
     runMarquee(track1, -1);
     runMarquee(track2, 1);
