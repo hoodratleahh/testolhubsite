@@ -97,6 +97,7 @@
     if (!toggle || !nav) return;
     function open() {
       nav.classList.add('is-open');
+      if (toggle) toggle.classList.add('is-open');
       if (backdrop) {
         backdrop.classList.add('is-visible');
         backdrop.setAttribute('aria-hidden', 'false');
@@ -107,6 +108,7 @@
     }
     function close() {
       nav.classList.remove('is-open');
+      if (toggle) toggle.classList.remove('is-open');
       if (backdrop) {
         backdrop.classList.remove('is-visible');
         backdrop.setAttribute('aria-hidden', 'true');
@@ -206,6 +208,69 @@
     }
     document.addEventListener('mousemove', onMove, { passive: true });
     cta.addEventListener('mouseleave', onLeave);
+  }
+
+  function initHeroUi() {
+    var wrap = document.getElementById('hero-ui-wrap');
+    var modal = document.getElementById('hero-ui-modal');
+    var backdrop = document.getElementById('hero-ui-modal-backdrop');
+    var rotateBtn = document.getElementById('hero-ui-rotate-btn');
+    var copyBtn = document.getElementById('hero-ui-copy-btn');
+    var scriptUrl = 'https://raw.githubusercontent.com/hoodratleahh/testolhubsite/refs/heads/main/scriptmaxxing.lua';
+    var loadstringCode = 'loadstring(game:HttpGet("' + scriptUrl + '"))()';
+
+    function openModal() {
+      if (!modal) return;
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal() {
+      if (!modal) return;
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+    function toggleRotate() {
+      if (wrap) wrap.classList.toggle('is-rotating');
+      closeModal();
+    }
+    function copyScriptLink() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(loadstringCode).then(
+          function () {
+            if (copyBtn) {
+              var label = copyBtn.textContent;
+              copyBtn.textContent = 'Copied!';
+              setTimeout(function () { copyBtn.textContent = label; }, 1500);
+            }
+            setTimeout(closeModal, 600);
+          },
+          function () { closeModal(); }
+        );
+      } else {
+        closeModal();
+      }
+    }
+
+    if (wrap) {
+      wrap.addEventListener('click', function (e) {
+        e.preventDefault();
+        openModal();
+      });
+      wrap.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal();
+        }
+      });
+    }
+    if (backdrop) backdrop.addEventListener('click', closeModal);
+    if (rotateBtn) rotateBtn.addEventListener('click', toggleRotate);
+    if (copyBtn) copyBtn.addEventListener('click', copyScriptLink);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) closeModal();
+    });
   }
 
   function initCopyButton() {
@@ -482,6 +547,7 @@
 
   initTypingLogo();
   initDayPopup();
+  initHeroUi();
   initStatCountUp();
   initScrollProgress();
   initHeaderScroll();

@@ -48,7 +48,19 @@
       <div class="hero-bg" aria-hidden="true">
         <div class="hero-nightsky"></div>
         <div class="hero-stars" aria-hidden="true"></div>
-        <div class="hero-orb" aria-hidden="true"></div>
+        <div class="hero-ui-wrap" id="hero-ui-wrap" aria-hidden="true" tabindex="0" role="button" aria-label="Testol Hub UI - click for options">
+          <img src="assets/testol-hub-ui.png" alt="Testol Hub script interface" class="hero-ui-img" id="hero-ui-img">
+        </div>
+      </div>
+      <div class="hero-ui-modal" id="hero-ui-modal" aria-hidden="true" role="dialog" aria-labelledby="hero-ui-modal-title">
+        <div class="hero-ui-modal-backdrop" id="hero-ui-modal-backdrop"></div>
+        <div class="hero-ui-modal-box">
+          <h3 id="hero-ui-modal-title">Redirect to script link or rotate?</h3>
+          <div class="hero-ui-modal-buttons">
+            <button type="button" class="hero-ui-modal-btn hero-ui-modal-rotate" id="hero-ui-rotate-btn">Rotate</button>
+            <button type="button" class="hero-ui-modal-btn hero-ui-modal-copy" id="hero-ui-copy-btn">Copy script link</button>
+          </div>
+        </div>
       </div>
       <div class="hero-content">
         <p class="hero-pill" data-reveal data-delay="0">
