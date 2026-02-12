@@ -4,7 +4,7 @@
    ============================================ */
 
 :root {
-  /* Nightsky palette — PFP-inspired black/white/grey base, cyan/teal/emerald as stars */
+  /* Valentine's theme — Nightsky + pink accents, futuristic cyan/teal/emerald blend */
   --bg: #050608;
   --bg-elevated: #0c0e12;
   --bg-card: rgba(255, 255, 255, 0.04);
@@ -17,6 +17,9 @@
   --accent-emerald: #10b981;
   --accent-blue: #3b82f6;
   --accent-soft: #67e8f9;
+  --accent-pink: #ec4899;
+  --accent-rose: #f472b6;
+  --accent-pink-soft: #f9a8d4;
   --cream: #f0fdfa;
   --gold: #fbbf24;
   --border: rgba(255, 255, 255, 0.05);
@@ -58,7 +61,7 @@ body {
 a { color: var(--accent-cyan); text-decoration: none; transition: color var(--transition-fast); }
 a:hover { color: var(--accent-soft); }
 
-/* ----- Day popup ----- */
+/* ----- Day popup (Valentine's knives) ----- */
 .day-popup-overlay {
   position: fixed;
   inset: 0;
@@ -88,7 +91,7 @@ a:hover { color: var(--accent-soft); }
   padding: 2.5rem;
   max-width: 380px;
   width: 90%;
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(236, 72, 153, 0.08);
   transform: scale(0.95) translateY(10px);
   transition: transform 0.4s var(--ease-out-expo);
 }
@@ -126,13 +129,14 @@ a:hover { color: var(--accent-soft); }
   transform: translateY(-2px);
 }
 .day-popup-good {
-  background: linear-gradient(135deg, #166534, #15803d);
+  background: linear-gradient(135deg, #be185d, #ec4899);
   color: #fff;
-  border-color: rgba(34, 197, 94, 0.4);
+  border-color: rgba(236, 72, 153, 0.5);
 }
 .day-popup-good:hover {
-  background: linear-gradient(135deg, #15803d, #16a34a);
-  border-color: rgba(34, 197, 94, 0.6);
+  background: linear-gradient(135deg, #9d174d, #db2777);
+  border-color: rgba(236, 72, 153, 0.7);
+  box-shadow: 0 0 24px rgba(236, 72, 153, 0.3);
 }
 .day-popup-bad {
   background: var(--bg-card);
@@ -140,16 +144,16 @@ a:hover { color: var(--accent-soft); }
   border-color: var(--border);
 }
 .day-popup-bad:hover {
-  background: rgba(6, 182, 212, 0.15);
-  border-color: var(--accent);
-  color: var(--accent-cyan);
+  background: rgba(236, 72, 153, 0.12);
+  border-color: var(--accent-pink);
+  color: var(--accent-rose);
 }
 .day-popup-thanks {
   font-family: var(--font-body);
   text-align: center;
   margin: 1rem 0 0;
   font-size: 0.9375rem;
-  color: var(--accent-cyan);
+  color: var(--accent-rose);
   min-height: 1.5em;
   opacity: 0;
   transform: translateY(4px);
@@ -167,10 +171,10 @@ a:hover { color: var(--accent-soft); }
   left: 0;
   width: 0%;
   height: 2px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan), var(--accent-emerald));
   z-index: 9999;
   transition: width 0.1s linear;
-  box-shadow: 0 0 12px rgba(6, 182, 212, 0.5);
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.4), 0 0 12px rgba(6, 182, 212, 0.4);
 }
 
 /* ----- Header (minimal, thin) ----- */
@@ -209,7 +213,7 @@ a:hover { color: var(--accent-soft); }
   min-height: 1.5em;
 }
 #logo-typed {
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
+  background: linear-gradient(135deg, var(--accent-rose), var(--accent-cyan), var(--accent-emerald));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -435,7 +439,7 @@ a:hover { color: var(--accent-soft); }
 .hero-nightsky {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, #030507 0%, #06080c 30%, #080b10 60%, #050608 100%);
+  background: linear-gradient(180deg, #030507 0%, #0a0510 25%, #06080c 45%, #080b10 70%, #050608 100%);
   z-index: 0;
 }
 .hero-stars {
@@ -444,23 +448,23 @@ a:hover { color: var(--accent-soft); }
   z-index: 1;
   background-image:
     radial-gradient(1.5px 1.5px at 10% 20%, rgba(34, 211, 238, 0.9), transparent),
-    radial-gradient(1.5px 1.5px at 25% 45%, rgba(6, 182, 212, 0.85), transparent),
+    radial-gradient(1.5px 1.5px at 25% 45%, rgba(236, 72, 153, 0.8), transparent),
     radial-gradient(1px 1px at 40% 15%, rgba(59, 130, 246, 0.8), transparent),
     radial-gradient(1.5px 1.5px at 55% 70%, rgba(16, 185, 129, 0.85), transparent),
-    radial-gradient(1px 1px at 70% 30%, rgba(34, 211, 238, 0.7), transparent),
+    radial-gradient(1px 1px at 70% 30%, rgba(244, 114, 182, 0.7), transparent),
     radial-gradient(1.5px 1.5px at 85% 55%, rgba(20, 184, 166, 0.9), transparent),
-    radial-gradient(1px 1px at 15% 80%, rgba(59, 130, 246, 0.7), transparent),
+    radial-gradient(1px 1px at 15% 80%, rgba(236, 72, 153, 0.65), transparent),
     radial-gradient(1px 1px at 90% 15%, rgba(16, 185, 129, 0.75), transparent),
     radial-gradient(1px 1px at 35% 90%, rgba(34, 211, 238, 0.6), transparent),
     radial-gradient(1.5px 1.5px at 60% 40%, rgba(6, 182, 212, 0.8), transparent),
-    radial-gradient(1px 1px at 5% 50%, rgba(20, 184, 166, 0.7), transparent),
+    radial-gradient(1px 1px at 5% 50%, rgba(244, 114, 182, 0.6), transparent),
     radial-gradient(1px 1px at 75% 85%, rgba(34, 211, 238, 0.65), transparent),
     radial-gradient(1px 1px at 20% 35%, rgba(16, 185, 129, 0.6), transparent),
-    radial-gradient(1.5px 1.5px at 45% 60%, rgba(34, 211, 238, 0.8), transparent),
+    radial-gradient(1.5px 1.5px at 45% 60%, rgba(236, 72, 153, 0.55), transparent),
     radial-gradient(1px 1px at 80% 25%, rgba(59, 130, 246, 0.65), transparent),
     radial-gradient(1px 1px at 8% 65%, rgba(20, 184, 166, 0.7), transparent),
     radial-gradient(1.5px 1.5px at 92% 75%, rgba(6, 182, 212, 0.75), transparent),
-    radial-gradient(1px 1px at 50% 8%, rgba(34, 211, 238, 0.6), transparent),
+    radial-gradient(1px 1px at 50% 8%, rgba(244, 114, 182, 0.5), transparent),
     radial-gradient(1px 1px at 65% 92%, rgba(16, 185, 129, 0.65), transparent);
   background-size: 100% 100%;
   background-repeat: repeat;
@@ -486,7 +490,7 @@ a:hover { color: var(--accent-soft); }
   border-radius: var(--radius-lg);
   overflow: visible;
   transition: box-shadow var(--transition-mid), transform var(--transition-mid), filter var(--transition-mid);
-  box-shadow: 0 0 60px rgba(6, 182, 212, 0.4), 0 0 100px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 60px rgba(6, 182, 212, 0.35), 0 0 80px rgba(236, 72, 153, 0.15), 0 0 100px rgba(16, 185, 129, 0.2);
   filter: brightness(1.05);
   z-index: 2;
   grid-column: 2;
@@ -496,7 +500,7 @@ a:hover { color: var(--accent-soft); }
 .hero-ui-wrap:hover {
   filter: brightness(1.1);
   transform: scale(1.02);
-  box-shadow: 0 0 80px rgba(6, 182, 212, 0.5), 0 0 120px rgba(16, 185, 129, 0.25);
+  box-shadow: 0 0 80px rgba(6, 182, 212, 0.45), 0 0 60px rgba(236, 72, 153, 0.2), 0 0 120px rgba(16, 185, 129, 0.25);
 }
 .hero-ui-wrap.is-rotating {
   animation: heroUiRotate 4s linear infinite;
@@ -635,18 +639,18 @@ a:hover { color: var(--accent-soft); }
   margin-bottom: 1rem;
   padding: 0.35rem 0.9rem;
   border-radius: 999px;
-  background: rgba(6, 182, 212, 0.08);
-  border: 1px solid rgba(34, 211, 238, 0.2);
+  background: rgba(236, 72, 153, 0.08);
+  border: 1px solid rgba(244, 114, 182, 0.25);
   animation: pillGlow 4s var(--ease-in-out) infinite;
 }
 @keyframes pillGlow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.2); }
-  50% { box-shadow: 0 0 24px 4px rgba(6, 182, 212, 0.15); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(236, 72, 153, 0.2); }
+  50% { box-shadow: 0 0 24px 4px rgba(236, 72, 153, 0.15); }
 }
 .hero-subheading {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--accent-cyan);
+  color: var(--accent-rose);
   margin: -0.5rem 0 1rem;
   text-align: center;
   opacity: 0.95;
@@ -673,11 +677,11 @@ a:hover { color: var(--accent-soft); }
   text-shadow: 0 0 40px rgba(6, 182, 212, 0.1);
 }
 .hero-title-accent {
-  background: linear-gradient(135deg, #67e8f9, var(--accent-cyan), var(--accent-emerald));
+  background: linear-gradient(135deg, var(--accent-rose), #67e8f9, var(--accent-cyan), var(--accent-emerald));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 20px rgba(6, 182, 212, 0.2));
+  filter: drop-shadow(0 0 20px rgba(236, 72, 153, 0.25)) drop-shadow(0 0 20px rgba(6, 182, 212, 0.2));
 }
 .hero-tagline {
   font-size: 1.0625rem;
@@ -723,14 +727,14 @@ a:hover { color: var(--accent-soft); }
 }
 .cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 40px rgba(6, 182, 212, 0.35);
+  box-shadow: 0 20px 40px rgba(236, 72, 153, 0.3), 0 20px 40px rgba(6, 182, 212, 0.35);
 }
 .cta-primary {
-  background: linear-gradient(135deg, #059669 0%, #10b981 50%, #06b6d4 100%);
+  background: linear-gradient(135deg, #be185d 0%, #ec4899 25%, #10b981 60%, #06b6d4 100%);
   color: #fff;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.2), 0 0 30px rgba(6, 182, 212, 0.15);
+  box-shadow: 0 0 0 1px rgba(236, 72, 153, 0.3), 0 0 30px rgba(236, 72, 153, 0.15), 0 0 30px rgba(6, 182, 212, 0.15);
 }
 .cta-primary::before {
   content: '';
@@ -741,7 +745,7 @@ a:hover { color: var(--accent-soft); }
   transition: transform 0.6s;
 }
 .cta-primary:hover::before { transform: translateX(100%); }
-.cta-primary:hover { color: #fff; box-shadow: 0 12px 40px rgba(5, 150, 105, 0.5), 0 0 50px rgba(6, 182, 212, 0.2); }
+.cta-primary:hover { color: #fff; box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4), 0 12px 40px rgba(5, 150, 105, 0.4), 0 0 50px rgba(6, 182, 212, 0.2); }
 .cta-primary:active {
   transform: translateY(-1px);
   box-shadow: 0 8px 24px rgba(5, 150, 105, 0.45);
@@ -1169,7 +1173,7 @@ a:hover { color: var(--accent-soft); }
   transform: translateX(-50%);
   width: min(90%, 600px);
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.25), transparent);
+  background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.2), rgba(34, 211, 238, 0.25), transparent);
   opacity: 0.5;
   pointer-events: none;
 }
@@ -1191,7 +1195,7 @@ a:hover { color: var(--accent-soft); }
   width: 60px;
   height: 3px;
   margin: 0.75rem auto 0;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+  background: linear-gradient(90deg, var(--accent-pink), var(--accent-cyan), var(--accent-emerald));
   border-radius: 2px;
   opacity: 0.8;
 }
@@ -1751,13 +1755,16 @@ a:hover { color: var(--accent-soft); }
   padding-bottom: max(2rem, env(safe-area-inset-bottom));
   border-top: 1px solid var(--border);
   text-align: center;
-  background: linear-gradient(180deg, transparent 0%, rgba(6, 182, 212, 0.03) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(236, 72, 153, 0.02) 50%, rgba(6, 182, 212, 0.03) 100%);
 }
 .site-footer p {
   font-size: 0.8125rem;
   color: var(--text-soft);
 }
 .footer-brand {
-  color: var(--accent-cyan);
+  background: linear-gradient(135deg, var(--accent-rose), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   font-weight: 500;
 }

@@ -29,16 +29,18 @@
     var popup = document.getElementById('day-popup');
     var buttons = popup && document.getElementById('day-popup-buttons');
     var thanksEl = popup && document.getElementById('day-popup-thanks');
-    var goodBtn = popup && popup.querySelector('[data-choice="good"]');
-    var badBtn = popup && popup.querySelector('[data-choice="bad"]');
+    var yesBtn = popup && popup.querySelector('[data-choice="yes"]');
+    var noBtn = popup && popup.querySelector('[data-choice="no"]');
     if (!popup) return;
-    var key = 'testolhub_day_asked';
+    var key = 'testolhub_valentines_asked';
     try {
       if (sessionStorage.getItem(key)) return;
     } catch (e) {}
     function closePopup(choice) {
-      if (thanksEl && (choice === 'good' || choice === 'bad')) {
-        thanksEl.textContent = choice === 'good' ? 'Glad to hear it.' : 'Hope tomorrow\'s better.';
+      if (thanksEl && (choice === 'yes' || choice === 'no')) {
+        thanksEl.textContent = choice === 'yes'
+          ? 'Enjoy! Shoot me up in the comments to let me know if it works :)'
+          : 'Hurry up then ngl, it\'s not going to be here forever lol';
         thanksEl.classList.add('is-visible');
         if (buttons) buttons.style.opacity = '0';
         setTimeout(doClose, 1200);
@@ -61,8 +63,8 @@
       popup.classList.add('is-open');
       popup.setAttribute('aria-hidden', 'false');
     }, 600);
-    if (goodBtn) goodBtn.addEventListener('click', function () { closePopup('good'); });
-    if (badBtn) badBtn.addEventListener('click', function () { closePopup('bad'); });
+    if (yesBtn) yesBtn.addEventListener('click', function () { closePopup('yes'); });
+    if (noBtn) noBtn.addEventListener('click', function () { closePopup('no'); });
   }
 
   function initScrollProgress() {
